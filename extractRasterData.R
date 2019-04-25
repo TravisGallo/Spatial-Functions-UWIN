@@ -23,7 +23,7 @@ mapview(sites)
 imp_map <- raster("~/Documents/GIS/nlcd_2011_impervious_2011_edition_2014_10_10/nlcd_2011_impervious_2011_edition_2014_10_10.img")
 
 # Function to extract the mean value of raster cells within a given buffer
-# Paramters
+# Parameters
   # points: the spatial points created above
   # raster_data: a spatial raster with values in Band 1
   # buffer_: the radius of a buffer (m) that you want to extract data from around each site
@@ -46,6 +46,6 @@ extractRasterData <- function(points, raster_data, buffer_){
 
 # run function to extract the mean parameter value around each site
 # For this example we extract the mean impervious cover within a 1km radius buffer
-mean_imp <- getRasterData(sites, imp_map, 1000)
+mean_imp <- extractRasterData(sites, imp_map, 1000)
 
   
