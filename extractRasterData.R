@@ -1,5 +1,4 @@
 library(raster)
-library(doParallel)
 library(sf)
 library(dplyr)
 library(mapview)
@@ -10,8 +9,8 @@ library(mapview)
 # Columns: LocationName, UTM_E, UTM_N, UTMZone, City
 site_coords <- read.csv("2019-04-25_SampleChicagoSites.csv", stringsAsFactors = FALSE)
 
-# create spatial points
-# you must put the correct CRS for respective city
+# Create spatial points
+# You must put the correct CRS for respective city
 sites <- st_as_sf(site_coords, coords = c("UTM_E", "UTM_N"), crs = 26916)
 
 # Visually inspect points to ensure the projection and location is correct

@@ -1,5 +1,4 @@
 library(raster)
-library(doParallel)
 library(sf)
 library(dplyr)
 library(mapview)
