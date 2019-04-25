@@ -11,6 +11,7 @@ Various functions to process spatial data related to UWIN projects in R
 
 2. **extractPopulationData.R** - This function extracts total housing units, housing density, total population, and population density within a given buffer around each sample site. This function calls 2010 statewide census data (using Illinois as an example) that is avaliable from http://silvis.forest.wisc.edu/data/housing-block-change/.
 
+3. **avaliableHabitat_NLCD** - This function extracts the proportion of 'habitat' within a given buffer around a sampling site using the National Landcover Dataset (avaliable from https://www.mrlc.gov/data?f%5B0%5D=category%3Aland%20cover). This data is at 30m resolution and is a rough proxy of 'habitat'. In my opinion if you have a more defined 'habitat' layer for your indivdiual city, this may be too coarse of a metric. However, it is a great way to compare between U.S. cities. In this function I considered the combination of forest, shrub, herbaceous, wetland, and developed open space as potential avaliable habitat. The NLCD Legend is avaliable from https://www.mrlc.gov/data/legends/national-land-cover-database-2011-nlcd2011-legend.
+
 ## Notes
 In all cases make sure all files are in your working directory or change local file paths. Additionally, be careful to use the correct projections for your region as noted in the scripts.
-
