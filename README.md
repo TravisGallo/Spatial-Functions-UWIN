@@ -1,4 +1,4 @@
-# UWIN Spatial Functions UWIN
+# UWIN Spatial Functions
 Various functions to process spatial data related to UWIN projects in R
 
 ## Example Data
