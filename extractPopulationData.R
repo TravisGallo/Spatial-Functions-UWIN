@@ -20,9 +20,8 @@ mapview(sites)
 
 # Function to extract the housing units and population data from census layer
 # Parameters
-# points: the spatial points created above
-# pop_data: a spatial vector of statewide census data - loaded above
-# buffer_: the radius of a buffer (m) to extract data from around each site
+  # points: the spatial points created above
+  # buffer_: the radius of a buffer (m) to extract data from around each site
 
 extractPopulationData <- function(points, buffer_){
   
