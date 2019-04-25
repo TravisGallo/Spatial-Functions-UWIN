@@ -3,7 +3,7 @@ Various functions to process spatial data related to UWIN projects in R
 
 ## Example Data
 
-2019-04-25_SampleChicagoSites.csv is a sample of 10 Chicago UWIN sites used across these function as an example dataset. To conduct the analysis for your sites, replace the sample Chicago data with your data following the same data format.
+**2019-04-25_SampleChicagoSites.csv** - an example dataset of 10 Chicago UWIN sites used with these function as an example. To conduct the analysis for your sites, replace the sample Chicago data with your data following the same data format.
 
 ## Scripts
 
