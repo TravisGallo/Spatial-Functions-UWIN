@@ -46,5 +46,3 @@ extractRasterData <- function(points, raster_data, buffer_){
 # run function to extract the mean parameter value around each site
 # For this example we extract the mean impervious cover within a 1km radius buffer
 mean_imp <- extractRasterData(sites, imp_map, 1000)
-
-  
