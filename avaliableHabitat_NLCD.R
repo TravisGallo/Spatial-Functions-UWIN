@@ -166,7 +166,8 @@ available_habitat_NLCD <- function(my_points, my_buffer, my_nlcd_path){
       landcover[which(landcover$cover == 73),2], # herbaceous
       landcover[which(landcover$cover == 74),2], # herbaceous
       landcover[which(landcover$cover == 90),2], # wetland
-      landcover[which(landcover$cover == 95),2]) # wetland
+      landcover[which(landcover$cover == 95),2]  # wetland
+    )
     
    return(habitat)
   }
