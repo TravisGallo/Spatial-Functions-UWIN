@@ -4,6 +4,7 @@ library(dplyr)
 library(mapview)
 library(cli)
 
+source("spatial_utilities.R")
 # Check to make sure you have the 2010 NLCD landcover data downloaded.
 #  write either the full or relative path to the NLCD data. If you do
 #  not have this file it can be downloaded from:
@@ -12,34 +13,9 @@ library(cli)
 my_nlcd_path <- 
   "../../GIS/NLCD_2011_landcover/NLCD_2011_Land_Cover_L48_20190424.img"
 
-# Check if the file exists, if not provide a warning.
-if( file.exists( my_nlcd_path ) ){
-  cat(
-    paste(
-      cli::col_green(
-        cli::symbol$tick
-      ),
-      "NLCD layer exists")
-  )
-}else{
- # The error (warning to provide to the user.)
- err <- paste0(
-   "NLCD layer not located at this file path.\n",
-   "  Please download it. For the U.S. it can be\n",
-   "  downloaded from:\n\n",
-   "  https://www.mrlc.gov/data?f%5B0%5D=category%3Aland%20cover\n\n",
-   "  The rest of the script will not work without a NLCD layer."
- )
- cat(
-   paste(
-     cli::col_red(
-       cli::symbol$cross
-     ),
-     err
-   )
- )
-}
-                      
+# check if a file exists at that path.
+check_path(my_nlcd_path)
+
 # Need a table of site locations
 # Here I use a random sample of 10 Chicago sites as an example
 # Data avaliable in same github repo
@@ -81,28 +57,6 @@ available_habitat_NLCD <- function(my_points, my_buffer, my_nlcd_path){
   #                           (i.e., from your current working directory),
   #                           or a full path.
 
-  # Utility for command line reporting
-  cli_post <- function(my_text, pass = FALSE){
-    if(pass){
-      cat(
-        paste(
-          cli::col_green(
-            cli::symbol$tick
-          ),
-          "\n"
-        )
-      )
-      
-    } else {
-      cat(
-        paste(
-          cli::symbol$bullet,
-          my_text,
-          " "
-        )
-      )
-    }
-  }
   # start command line reporting
   cat(
     paste0(
@@ -111,31 +65,31 @@ available_habitat_NLCD <- function(my_points, my_buffer, my_nlcd_path){
     )
   )
   # Step 1: Load the raster data
-  cli_post("Loading raster:")
+  .cli_post("Loading raster:")
   lc_map <- raster::raster(my_nlcd_path)
-  cli_post(pass = TRUE)
+  .cli_post(pass = TRUE)
 
   # Step 2: Reproject points to mach landcover raster
-  cli_post("Reprojecting my_points to raster projection:")
+  .cli_post("Reprojecting my_points to raster projection:")
   points_RP <- sf::st_transform(
     my_points,
     crs = sf::st_crs(
       lc_map
     )
   )
-  cli_post(pass = TRUE)
+  .cli_post(pass = TRUE)
   # Step 3:
   # Extract land cover data for each point, given a fixed radius buffer
   # This returns a list
   # Each list element contains the land cover catergory of each raster cell 
     # within the respective buffer feature
-  cli_post("Extracting spatial data:")
+  .cli_post("Extracting spatial data:")
   lc_extract <- raster::extract(
     lc_map,
     points_RP,
     buffer = my_buffer
   )
-  cli_post(pass = TRUE)
+  .cli_post(pass = TRUE)
   
   # Now we have a list element for each buffer/site 
   # We will summarize the information within each list element seperately
@@ -174,7 +128,7 @@ available_habitat_NLCD <- function(my_points, my_buffer, my_nlcd_path){
   
   # Loop through each list element and calculate the proportion of habitat
   # lapply returns a list so we use do.call to collapse the list into a vector
-  cli_post("Summarizing data:")
+  .cli_post("Summarizing data:")
   habitat <- do.call(
     c,
     lapply(
@@ -188,10 +142,11 @@ available_habitat_NLCD <- function(my_points, my_buffer, my_nlcd_path){
     location_name = points_RP$LocationName,
     avail_habitat = habitat
   )
-  cli_post(pass = TRUE)
+  .cli_post(pass = TRUE)
   # end command line reporting
   cat(
     paste0(
+      "\n",
       cli::rule(line = 2),
       "\n\n"
     )
