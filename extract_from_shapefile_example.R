@@ -15,7 +15,9 @@ site_coords <- read.csv(
 )
 
 # Create spatial points
-# You must put the correct CRS for respective city
+#  You must put the correct coordinate reference system (CRS)
+#  the respective city. For some extra infromation check out
+#  browseURL("https://mgimond.github.io/Spatial/coordinate-systems-in-r.html")
 sites <- sf::st_as_sf(
   site_coords,
   coords = c("UTM_E", "UTM_N"),
@@ -27,7 +29,7 @@ mapview(sites)
 
 # Load 2010 statewide census data for housing and population
 # Data can be downloaded from:
-# browseURL(http://silvis.forest.wisc.edu/data/housing-block-change/)
+# browseURL("http://silvis.forest.wisc.edu/data/housing-block-change/")
 # REPLACE FILE PATH AND LAYER NAME WITH LOCAL FILE PATH
 pop_data <- sf::st_read(
   "../../GIS/housing_density", 
