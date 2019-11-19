@@ -97,7 +97,7 @@ extract_lulc <- function(
     )
   )
   # Step 1. reproject the point data to match raster projection
-  .cli_post("Reprojecting my_points to raster projection:")
+  .cli_post("Reprojecting my_points to map projection:")
   
   points_RP <- sf::st_transform(
     my_points, 
@@ -239,7 +239,7 @@ extract_shp_density <- function(
   }
   # STEP 1
   # Reproject the point data to match projection of population layer
-  .cli_post("Reprojecting my_points to raster projection:")
+  .cli_post("Reprojecting my_points to map projection:")
   
   points_RP <- sf::st_transform(
     my_points,

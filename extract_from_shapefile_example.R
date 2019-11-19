@@ -1,7 +1,16 @@
+##############################################
+#
+# Example of extracting from a shapefile
+#
+# Written by T. Gallo and M. Fidino
+#
+##############################################
+
 library(raster)
 library(sf)
 library(dplyr)
 library(mapview)
+library(cli)
 
 source("spatial_utilities.R")
 
@@ -45,5 +54,3 @@ population_data <- extract_shp_density(
   my_shp = pop_data,
   layers = c("POP10", "HU10")
 )
-
-
