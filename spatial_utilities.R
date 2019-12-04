@@ -52,9 +52,10 @@ check_path <- function(path){
 
 extract_lulc <- function(
   my_points,
-  my_buffer,
+  my_buffer = NULL,
   my_raster_data,
-  lulc_cats = NULL
+  lulc_cats = NULL,
+  point_names = NULL
 ){
   # This function has 4 arguments:
   #  my_points (sf object): The coordinates  of the sites you want to collect
@@ -112,7 +113,8 @@ extract_lulc <- function(
   # We need a sub-function to calculate the proportion of each category
   spatial_summary <- function(
     x,
-    ncats = my_raster_data@data@max
+    ncats = my_raster_data@data@max,
+    ...
   ){
     return(
       prop.table(
@@ -127,18 +129,21 @@ extract_lulc <- function(
     points_RP,
     fun=spatial_summary,
     buffer= my_buffer,
-    df=TRUE
+    #df=TRUE,
+    na.rm = TRUE
   )
   .cli_post(pass = TRUE)
   
-  prop_extract <- matrix(
-    prop_extract[,names(my_raster_data)],
-    ncol = my_raster_data@data@max,
-    nrow = nrow(points_RP),
-    byrow = TRUE
-  )
+  #prop_extract <- matrix(
+  #  prop_extract[,names(my_raster_data)],
+  #  ncol = my_raster_data@data@max,
+  #  nrow = nrow(points_RP),
+  #  byrow = TRUE
+  #)
   
-  row.names(prop_extract) <- points_RP$LocationName
+  if(!is.null(point_names)){
+  row.names(prop_extract) <- point_names
+  }
   
   # if lulc_cats is a list
   if(is.list(lulc_cats)){    
