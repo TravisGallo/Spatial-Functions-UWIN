@@ -53,10 +53,11 @@ my_map <- raster::raster(my_raster_path)
 #  For this example we will extract the proportion canopy cover (lulc class 1)
 #    and create our own 'impervious cover' value, which is the sum of multiple
 #    lulc classes.
-lulc_prop <- extract_lulc(my_points = sites,
-                          my_buffer = 1000,
-                          my_raster_data = my_map,
-                          lulc_cats = list("tree" = 1,
-                                           "imperv" = 5:7
-                                          )
+lulc_prop <- extract_raster_prop(my_points = sites,
+                                 my_buffer = 1000,
+                                 my_raster_data = my_map,
+                                 lulc_cats = list("tree" = 1,
+                                                  "imperv" = 5:7
+                                                 ),
+                                 point_names = sites$LocationName
 )

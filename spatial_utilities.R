@@ -57,7 +57,7 @@ extract_raster_prop <- function(
   lulc_cats = NULL,
   point_names = NULL
 ){
-  # This function has 4 arguments:
+  # This function has 5 arguments:
   #  my_points (sf object): The coordinates  of the sites you want to collect
   #                           spatial data from. The column name for the
   #                           names of the sites must be 'LocationName'.
@@ -90,6 +90,10 @@ extract_raster_prop <- function(
   #                                 they are then those names will be added
   #                                 to the returned object. If NULL, then all
   #                                 categories will be returned.
+  #  point_names (character or factor): The names of the point locations, 
+  #                                 this is generally a column in the 
+  #                                 my_points object (e.g., my_points$NAME)
+  #                                 supplied to the first function argument.
   # start command line reporting
   cat(
     paste0(
