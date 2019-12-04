@@ -50,7 +50,7 @@ check_path <- function(path){
 
 # extract land use landcover data
 
-extract_lulc <- function(
+extract_raster_prop <- function(
   my_points,
   my_buffer = NULL,
   my_raster_data,
@@ -129,17 +129,18 @@ extract_lulc <- function(
     points_RP,
     fun=spatial_summary,
     buffer= my_buffer,
-    #df=TRUE,
     na.rm = TRUE
   )
   .cli_post(pass = TRUE)
   
-  #prop_extract <- matrix(
-  #  prop_extract[,names(my_raster_data)],
-  #  ncol = my_raster_data@data@max,
-  #  nrow = nrow(points_RP),
-  #  byrow = TRUE
-  #)
+  if(is.numeric(prop_extract)){
+  prop_extract <- matrix(
+    prop_extract,
+    ncol = my_raster_data@data@max,
+    nrow = nrow(points_RP),
+    byrow = TRUE
+  )
+  }
   
   if(!is.null(point_names)){
   row.names(prop_extract) <- point_names
@@ -194,9 +195,9 @@ extract_lulc <- function(
 
 
 
-# extract from a shapefile
+# extract from a polygon
 
-extract_shp_density <- function(
+extract_polygon <- function(
   my_points,
   my_buffer,
   my_shp,
@@ -328,3 +329,5 @@ extract_shp_density <- function(
   }
   return(summary_data)
 }
+
+
