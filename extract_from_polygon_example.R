@@ -33,6 +33,7 @@ sites <- sf::st_as_sf(
   crs = 26916
 )
 
+
 # Visually inspect points to ensure the projection and location is correct
 mapview(sites)
 
@@ -48,9 +49,9 @@ pop_data <- sf::st_read(
 # Run function to calculate housing units, housing density, population 
 #  and population density.  For this example we extract population data 
 #  within a 1km radius buffer.
-population_data <- extract_shp_density(
+population_data <- extract_polygon(
   my_points = sites,
   my_buffer = 1000,
   my_shp = pop_data,
-  layers = c("POP10", "HU10")
+  layers = c("HU10")
 )
