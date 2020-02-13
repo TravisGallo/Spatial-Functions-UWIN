@@ -146,9 +146,9 @@ extract_raster_prop <- function(
   )
   }
   
-  if(!is.null(point_names)){
-  row.names(prop_extract) <- point_names
-  }
+  #if(!is.null(point_names)){
+  #row.names(prop_extract) <- point_names
+  #}
   
   # if lulc_cats is a list
   if(is.list(lulc_cats)){    
@@ -181,7 +181,12 @@ extract_raster_prop <- function(
   # create dataframe matching the sites with the extracted data
   .cli_post("Summarizing data:")
   df <- data.frame(
-    LocationName = row.names(prop_extract),
+    LocationName = point_names,
+    #  if(is.matrix(prop_extract)){
+    #  row.names(prop_extract)
+    #} else {
+    #  names(prop_extract)
+    #},
     prop_extract,
     row.names = NULL
   )
